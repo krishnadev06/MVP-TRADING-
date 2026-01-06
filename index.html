@@ -7,19 +7,10 @@
   
   <!-- External Resources -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Import Map for ESM Modules -->
-  <script type="importmap">
-  {
-    "imports": {
-      "@google/genai": "https://esm.sh/@google/genai@0.14.0"
-    }
-  }
-  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -44,48 +35,32 @@
       letter-spacing: -0.05em;
     }
 
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
     /* Refined Blueprint Grid */
     .blueprint-grid {
       background-image: 
         linear-gradient(rgba(2, 6, 23, 0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(2, 6, 23, 0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-size: 30px 30px;
     }
 
     .glass-nav {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       border-bottom: 1px solid rgba(2, 6, 23, 0.05);
     }
 
     .reveal-item {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .reveal-item.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    /* Partner Section: Steel Vault Style */
-    .partner-vault {
-      background: #020617;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .partner-vault:hover {
-      border-color: var(--accent-amber);
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Structural Integrity Section: Beveled Shape */
-    .integrity-shape {
-      clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
     }
 
     @keyframes scroll {
@@ -96,118 +71,124 @@
     .scroll-content {
       display: flex;
       white-space: nowrap;
-      animation: scroll 50s linear infinite;
+      animation: scroll 35s linear infinite;
     }
 
     .scroll-content:hover {
       animation-play-state: paused;
     }
 
-    .border-text-white {
-      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-    }
-
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #f8fafc; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent-amber); }
 
     .shadow-premium {
-      box-shadow: 0 50px 100px -20px rgba(2, 6, 23, 0.15);
+      box-shadow: 0 30px 60px -15px rgba(2, 6, 23, 0.08);
     }
 
-    .premium-dark-gradient {
-      background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+    .tech-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+    .tech-card:hover {
+      border-color: var(--accent-amber);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Prevent text overflow on small screens */
+    .fluid-text-hero {
+      font-size: clamp(3rem, 10vw, 8rem);
     }
   </style>
 </head>
 <body class="selection:bg-amber-100 selection:text-amber-900">
 
   <!-- Navigation -->
-  <nav id="navbar" class="fixed w-full z-[100] transition-all duration-500 py-6 bg-transparent">
-    <div class="container mx-auto px-6 flex justify-between items-center">
-      <a href="#" class="flex items-center space-x-4 group">
-        <div class="w-12 h-12 flex items-center justify-center font-black text-2xl rounded-xl bg-[#020617] text-white shadow-xl transition-all duration-500 group-hover:bg-amber-500 group-hover:scale-110">M</div>
+  <nav id="navbar" class="fixed w-full z-[100] transition-all duration-300 py-4 md:py-6 bg-transparent">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+      <a href="#" class="flex items-center space-x-3 md:space-x-4 group">
+        <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-xl md:text-2xl rounded-xl bg-[#020617] text-white shadow-xl group-hover:bg-amber-500 transition-colors">M</div>
         <div>
-          <span class="block font-black text-xl md:text-2xl leading-none tracking-tighter text-[#020617]">MVP TRADING</span>
-          <span class="text-[8px] font-black uppercase tracking-[0.4em] opacity-40">Supply Core Grid</span>
+          <span class="block font-black text-lg md:text-2xl leading-none tracking-tighter text-[#020617]">MVP TRADING</span>
+          <span class="text-[7px] md:text-[8px] font-black uppercase tracking-[0.3em] opacity-40">Supply Node</span>
         </div>
       </a>
 
-      <div class="hidden lg:flex items-center space-x-12 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
+      <div class="hidden lg:flex items-center space-x-10 text-[9px] font-black uppercase tracking-[0.2em] text-slate-500">
         <a href="#materials" class="hover:text-amber-500 transition-colors">Inventory</a>
         <a href="#projects" class="hover:text-amber-500 transition-colors">Projects</a>
-        <a href="#vision" class="hover:text-amber-500 transition-colors">Leadership</a>
+        <a href="#vision" class="hover:text-amber-500 transition-colors">Vision</a>
         <a href="#reach" class="hover:text-amber-500 transition-colors">Contact</a>
-        <button class="bg-[#020617] text-white px-8 py-3.5 rounded-xl font-black hover:bg-amber-500 transition-all shadow-lg">ENQUIRE HUB</button>
+        <button class="bg-[#020617] text-white px-6 py-3 rounded-lg font-black hover:bg-amber-500 transition-all">ENQUIRE</button>
       </div>
 
-      <button id="mobile-menu-btn" class="lg:hidden p-3 rounded-xl bg-slate-100 text-[#020617]">
-        <i data-lucide="menu"></i>
+      <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg bg-slate-100 text-[#020617]">
+        <i data-lucide="menu" size="20"></i>
       </button>
     </div>
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="fixed inset-0 z-[300] bg-[#020617]/98 backdrop-blur-2xl flex flex-col p-10 hidden">
-    <div class="flex justify-between items-center mb-16">
-      <div class="flex items-center space-x-4">
-        <div class="w-12 h-12 bg-amber-500 text-[#020617] flex items-center justify-center font-black text-2xl rounded-xl">M</div>
-        <span class="font-black text-white text-2xl tracking-tighter">MVP TRADING</span>
+  <div id="mobile-menu" class="fixed inset-0 z-[300] bg-[#020617]/98 backdrop-blur-xl flex flex-col p-8 hidden">
+    <div class="flex justify-between items-center mb-12">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-amber-500 text-[#020617] flex items-center justify-center font-black text-xl rounded-lg">M</div>
+        <span class="font-black text-white text-xl tracking-tighter">MVP TRADING</span>
       </div>
-      <button id="close-mobile-menu" class="text-white p-4 bg-white/10 rounded-xl"><i data-lucide="x"></i></button>
+      <button id="close-mobile-menu" class="text-white p-3 bg-white/10 rounded-lg"><i data-lucide="x" size="20"></i></button>
     </div>
-    <div class="flex flex-col space-y-10">
-      <a href="#materials" class="text-5xl font-black text-white uppercase tracking-tighter hover:text-amber-500 transition-colors">Inventory</a>
-      <a href="#projects" class="text-5xl font-black text-white uppercase tracking-tighter hover:text-amber-500 transition-colors">Projects</a>
-      <a href="#vision" class="text-5xl font-black text-white uppercase tracking-tighter hover:text-amber-500 transition-colors">Leadership</a>
-      <a href="#reach" class="text-5xl font-black text-white uppercase tracking-tighter hover:text-amber-500 transition-colors">Contact</a>
-      <button class="mt-12 bg-amber-500 text-[#020617] py-7 rounded-2xl font-black text-lg uppercase tracking-widest shadow-2xl">Quick Quote</button>
+    <div class="flex flex-col space-y-8">
+      <a href="#materials" class="text-3xl font-black text-white uppercase tracking-tighter hover:text-amber-500 transition-colors">Inventory</a>
+      <a href="#projects" class="text-3xl font-black text-white uppercase tracking-tighter hover:text-amber-500 transition-colors">Projects</a>
+      <a href="#vision" class="text-3xl font-black text-white uppercase tracking-tighter hover:text-amber-500 transition-colors">Leadership</a>
+      <a href="#reach" class="text-3xl font-black text-white uppercase tracking-tighter hover:text-amber-500 transition-colors">Contact</a>
+      <button class="mt-8 bg-amber-500 text-[#020617] py-5 rounded-xl font-black text-base uppercase tracking-widest">Get Quick Quote</button>
     </div>
   </div>
 
   <!-- Hero Section -->
-  <header class="relative min-h-screen flex items-center overflow-hidden blueprint-grid">
+  <header class="relative min-h-[85vh] md:min-h-screen flex items-center overflow-hidden blueprint-grid">
     <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-gradient-to-r from-white via-white/40 to-transparent z-10"></div>
-      <img src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2000" class="w-full h-full object-cover grayscale opacity-5 transition-transform duration-1000" id="hero-img">
+      <div class="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent z-10"></div>
+      <img src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2000" class="w-full h-full object-cover grayscale opacity-5" id="hero-img">
     </div>
 
-    <div class="container mx-auto px-6 relative z-20 py-32">
-      <div class="grid lg:grid-cols-12 gap-16 items-center">
+    <div class="container mx-auto px-4 md:px-6 relative z-20 py-20 md:py-32">
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-10 reveal-item">
-          <div class="flex items-center space-x-4 mb-8">
-            <span class="bg-amber-500 text-[#020617] px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.3em]">SINCE 2021</span>
-            <div class="w-12 h-[1px] bg-slate-200"></div>
-            <span class="text-slate-400 text-[8px] font-black uppercase tracking-[0.4em]">ISO 9001:2020 CERTIFIED</span>
+          <div class="flex items-center space-x-3 mb-6 md:mb-8">
+            <span class="bg-amber-500 text-[#020617] px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-[0.2em]">SINCE 1994</span>
+            <div class="w-8 h-[1px] bg-slate-300"></div>
+            <span class="text-slate-400 text-[8px] font-black uppercase tracking-[0.3em]">CERTIFIED EXCELLENCE</span>
           </div>
           
-          <h1 class="text-[12vw] lg:text-[130px] font-black text-[#020617] leading-[0.8] tracking-tighter mb-12">
+          <h1 class="fluid-text-hero font-black text-[#020617] leading-[0.9] tracking-tighter mb-8 md:mb-12">
             STRUCTURAL <br>
-            <span class="text-amber-500">PRECISION.</span> <br>
-            <span class="text-transparent" style="-webkit-text-stroke: 1.5px #020617; opacity: 0.1;">LEGACY SUPPLY.</span>
+            <span class="text-amber-500">MASTERY.</span> <br>
+            <span class="hidden md:inline text-transparent" style="-webkit-text-stroke: 1px #020617; opacity: 0.1;">LEGACY.</span>
           </h1>
           
-          <div class="max-w-4xl mb-16 border-l-4 border-amber-500 pl-10">
-            <p class="text-xl md:text-3xl text-slate-600 font-light leading-snug mb-10">
+          <div class="max-w-3xl mb-10 md:mb-16 border-l-4 border-amber-500 pl-6 md:pl-10">
+            <p class="text-lg md:text-3xl text-slate-600 font-medium leading-tight mb-6 md:mb-10">
               Reinforcing South India with premium structural materials. Delivered with unmatched speed and <span class="text-[#020617] font-bold">technical integrity</span>.
             </p>
-            <div class="flex flex-wrap gap-12">
+            <div class="flex flex-wrap gap-8 md:gap-12">
               <div>
-                <p class="text-[#020617] text-4xl font-black tracking-tighter">2.4M+</p>
-                <p class="text-amber-600 text-[9px] font-black uppercase tracking-widest">MT Distributed</p>
+                <p class="text-[#020617] text-2xl md:text-4xl font-black tracking-tighter">2.4M+</p>
+                <p class="text-amber-600 text-[8px] font-black uppercase tracking-widest">MT Distributed</p>
               </div>
               <div>
-                <p class="text-[#020617] text-4xl font-black tracking-tighter">500+</p>
-                <p class="text-blue-600 text-[9px] font-black uppercase tracking-widest">Active Sites</p>
+                <p class="text-[#020617] text-2xl md:text-4xl font-black tracking-tighter">500+</p>
+                <p class="text-blue-600 text-[8px] font-black uppercase tracking-widest">Active Sites</p>
               </div>
             </div>
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-6">
-            <a href="#materials" class="bg-[#020617] text-white px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-500 transition-all text-center">Procurement Grid</a>
-            <button class="flex items-center justify-center space-x-4 bg-slate-100 px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all">
-              <i data-lucide="shield" class="text-amber-500"></i>
+          <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
+            <a href="#materials" class="bg-[#020617] text-white px-8 py-5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-amber-500 transition-all text-center shadow-lg">Browse Inventory</a>
+            <button class="flex items-center justify-center space-x-3 bg-slate-100 px-8 py-5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-200 transition-all">
+              <i data-lucide="shield" class="text-amber-500" size="16"></i>
               <span>Safety Standards</span>
             </button>
           </div>
@@ -217,285 +198,246 @@
   </header>
 
   <!-- Hub Cards Section -->
-  <section class="container mx-auto px-6 -mt-24 relative z-30 mb-32">
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="reveal-item bg-white p-12 rounded-[2.5rem] shadow-premium border border-slate-50 group hover:-translate-y-4 transition-all">
-        <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#020617] group-hover:text-white transition-all">
-          <i data-lucide="database"></i>
+  <section class="container mx-auto px-4 md:px-6 -mt-12 md:-mt-24 relative z-30 mb-16 md:mb-32">
+    <div class="grid md:grid-cols-3 gap-4 md:gap-8">
+      <div class="reveal-item bg-white p-6 md:p-12 rounded-3xl shadow-premium border border-slate-50 group hover:-translate-y-2 transition-all">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#020617] group-hover:text-white transition-all">
+          <i data-lucide="database" size="20"></i>
         </div>
-        <h4 class="text-xl font-black text-[#020617] mb-4 tracking-tighter uppercase">Technical Lookup</h4>
-        <p class="text-slate-500 text-sm leading-relaxed mb-8">Direct access to IS 2062 steel data sheets and compliance certificates.</p>
+        <h4 class="text-lg md:text-xl font-black text-[#020617] mb-3 tracking-tighter uppercase">Technical Data</h4>
+        <p class="text-slate-500 text-xs md:text-sm leading-relaxed mb-6">Direct access to IS 2062 steel data sheets and compliance certificates.</p>
         <button class="flex items-center text-[9px] font-black uppercase tracking-widest text-amber-600">Browse Specs <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></button>
       </div>
-      <div class="reveal-item bg-white p-12 rounded-[2.5rem] shadow-premium border border-slate-50 group hover:-translate-y-4 transition-all" style="transition-delay: 100ms;">
-        <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#020617] group-hover:text-white transition-all">
-          <i data-lucide="truck"></i>
+      <div class="reveal-item bg-white p-6 md:p-12 rounded-3xl shadow-premium border border-slate-50 group hover:-translate-y-2 transition-all">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#020617] group-hover:text-white transition-all">
+          <i data-lucide="truck" size="20"></i>
         </div>
-        <h4 class="text-xl font-black text-[#020617] mb-4 tracking-tighter uppercase">Logistics Engine</h4>
-        <p class="text-slate-500 text-sm leading-relaxed mb-8">Real-time fleet tracking and automated delivery scheduling for site-direct drop.</p>
+        <h4 class="text-lg md:text-xl font-black text-[#020617] mb-3 tracking-tighter uppercase">Logistics</h4>
+        <p class="text-slate-500 text-xs md:text-sm leading-relaxed mb-6">Real-time fleet tracking and automated delivery scheduling for site-direct drop.</p>
         <button class="flex items-center text-[9px] font-black uppercase tracking-widest text-amber-600">Track Order <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></button>
       </div>
-      <div class="reveal-item bg-white p-12 rounded-[2.5rem] shadow-premium border border-slate-50 group hover:-translate-y-4 transition-all" style="transition-delay: 200ms;">
-        <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#020617] group-hover:text-white transition-all">
-          <i data-lucide="file-text"></i>
+      <div class="reveal-item bg-white p-6 md:p-12 rounded-3xl shadow-premium border border-slate-50 group hover:-translate-y-2 transition-all">
+        <div class="w-12 h-12 md:w-16 md:h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#020617] group-hover:text-white transition-all">
+          <i data-lucide="file-text" size="20"></i>
         </div>
-        <h4 class="text-xl font-black text-[#020617] mb-4 tracking-tighter uppercase">Commercial Hub</h4>
-        <p class="text-slate-500 text-sm leading-relaxed mb-8">Bulk quantity pricing based on current structural market indices.</p>
-        <button class="flex items-center text-[9px] font-black uppercase tracking-widest text-amber-600">Generate Quote <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></button>
+        <h4 class="text-lg md:text-xl font-black text-[#020617] mb-3 tracking-tighter uppercase">Commercial</h4>
+        <p class="text-slate-500 text-xs md:text-sm leading-relaxed mb-6">Bulk quantity pricing based on current structural market indices.</p>
+        <button class="flex items-center text-[9px] font-black uppercase tracking-widest text-amber-600">Request Quote <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></button>
       </div>
     </div>
   </section>
 
-  <!-- Authorized Partners: THE WOW SECTION -->
-  <section class="bg-[#020617] py-48 relative overflow-hidden">
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
-      <span class="text-[30vw] font-black uppercase tracking-tighter text-white">AUTHENTIC</span>
-    </div>
-    
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="reveal-item text-center mb-32">
-        <span class="text-amber-500 font-black text-[10px] uppercase tracking-[0.6em] mb-6 block">Supply Node Alpha</span>
-        <h2 class="text-5xl md:text-8xl text-white font-black tracking-tighter leading-none mb-12">Authorized <br><span class="text-transparent border-text-white">Tier-1 Partners.</span></h2>
-        <p class="text-slate-500 text-lg max-w-2xl mx-auto font-medium">Direct factory-to-site procurement nodes through our exclusive Tier-1 manufacturer alliances.</p>
+  <!-- Supply Node Alpha: PARTNERS -->
+  <section class="bg-white py-12 md:py-24 border-y border-slate-100">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="reveal-item text-center mb-12">
+        <span class="text-amber-500 font-black text-[9px] uppercase tracking-[0.4em] mb-3 block">Supply Node Alpha</span>
+        <h2 class="text-3xl md:text-5xl font-black text-[#020617] tracking-tighter">Authorized Tier-1 Partners</h2>
       </div>
 
-      <!-- Partner Grid -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24" id="partners-showcase">
-        <!-- Partners injected via JS -->
-      </div>
-
-      <!-- Ticker -->
-      <div class="w-full overflow-hidden py-12 border-y border-white/5">
-        <div class="scroll-content flex items-center gap-24" id="alliances-ticker">
-          <!-- Ticker injected via JS -->
+      <div class="w-full overflow-hidden relative">
+        <div class="scroll-content flex items-center gap-12 md:gap-24 py-6" id="partners-ticker">
+          <!-- Partners injected via JS -->
         </div>
+        <div class="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
+        <div class="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
       </div>
     </div>
   </section>
 
-  <!-- Materials Section -->
-  <section id="materials" class="py-32 md:py-64 blueprint-grid bg-white">
-    <div class="container mx-auto px-6">
-      <div class="reveal-item mb-28 flex flex-col md:flex-row justify-between items-end gap-10">
-        <div class="max-w-3xl">
-          <h2 class="text-6xl md:text-[110px] text-[#020617] mb-8 font-black tracking-tighter leading-none">The Vault.</h2>
-          <p class="text-slate-500 text-xl font-medium leading-relaxed">Specialized wholesale inventory managed with technical precision and color-coded for industrial identification.</p>
-        </div>
-        <div class="flex items-center space-x-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
-          <span>Batch No. Filter</span>
-          <div class="w-16 h-1 bg-amber-500"></div>
-          <span>Ref 1994-2024</span>
-        </div>
+  <!-- Inventory Vault -->
+  <section id="materials" class="py-16 md:py-32 blueprint-grid bg-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="reveal-item mb-12 text-center md:text-left">
+        <h2 class="text-5xl md:text-[90px] text-[#020617] mb-4 font-black tracking-tighter leading-none">The Vault.</h2>
+        <p class="text-slate-500 text-base md:text-xl font-medium leading-relaxed max-w-2xl">Wholesale inventory managed with technical precision and structural verification.</p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14" id="products-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12" id="products-grid">
         <!-- Products injected here -->
       </div>
     </div>
   </section>
 
-  <!-- Structural Integrity Section: THE SHAPE SECTION -->
-  <section class="bg-[#020617] py-32 md:py-64 relative">
-    <div class="integrity-shape bg-[#0f172a] absolute inset-0 z-0"></div>
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid lg:grid-cols-2 gap-24 items-center">
-        <div class="reveal-item">
-          <div class="flex items-center space-x-6 mb-12">
-            <div class="w-16 h-1 bg-amber-500 rounded-full"></div>
-            <span class="text-xs font-black uppercase tracking-[0.5em] text-amber-500">Validation Protocol</span>
+  <!-- Technical Assurance Dashboard -->
+  <section class="bg-[#020617] py-16 md:py-32 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-full h-full bg-white/[0.01] pointer-events-none"></div>
+    <div class="container mx-auto px-4 md:px-6 relative z-10">
+      <div class="reveal-item flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 md:mb-24 gap-8">
+        <div class="max-w-xl">
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-8 h-[2px] bg-amber-500"></div>
+            <span class="text-amber-500 font-black text-[8px] uppercase tracking-[0.4em]">Validation Protocol</span>
           </div>
-          <h2 class="text-5xl md:text-8xl text-white font-black tracking-tighter italic leading-none mb-12">Integrity <br>Uncompromised.</h2>
-          <p class="text-slate-400 text-xl md:text-2xl font-light leading-relaxed mb-16 max-w-xl">
-            Every material batch undergoes a rigorous <span class="text-white font-bold italic">Chemical-Mechanical Matrix Test</span> to ensure zero-defect reliability at the core.
-          </p>
-          <div class="grid gap-8">
-            <div class="p-8 bg-white/5 border border-white/10 rounded-2xl flex items-start space-x-8 hover:bg-white/10 transition-all">
-              <i data-lucide="microscope" class="text-amber-500 w-10 h-10 shrink-0"></i>
-              <div>
-                <h4 class="text-white font-black uppercase text-xs tracking-widest mb-2">Molecular Audit</h4>
-                <p class="text-slate-500 text-[10px] uppercase font-bold leading-loose tracking-widest">Verification of carbon-to-manganese ratios for ultimate ductility.</p>
-              </div>
-            </div>
-            <div class="p-8 bg-white/5 border border-white/10 rounded-2xl flex items-start space-x-8 hover:bg-white/10 transition-all">
-              <i data-lucide="layers" class="text-blue-500 w-10 h-10 shrink-0"></i>
-              <div>
-                <h4 class="text-white font-black uppercase text-xs tracking-widest mb-2">Stress Fracture Test</h4>
-                <p class="text-slate-500 text-[10px] uppercase font-bold leading-loose tracking-widest">PSI pressure indexing for high-rise foundational stability.</p>
-              </div>
-            </div>
-          </div>
+          <h2 class="text-4xl md:text-7xl text-white font-black tracking-tighter leading-none mb-6">Integrity <br><span class="text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Verified.</span></h2>
+          <p class="text-slate-400 text-sm md:text-base font-medium leading-relaxed">NABL-accredited verification nodes ensuring zero-defect material integration across every site.</p>
         </div>
-        <div class="reveal-item relative">
-          <div class="relative overflow-hidden rounded-[3rem] shadow-premium aspect-[4/5]">
-            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200" class="w-full h-full object-cover grayscale opacity-60">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#020617] to-transparent"></div>
-            <div class="absolute bottom-12 right-12 bg-white p-12 rounded-[2.5rem] shadow-4xl text-[#020617] transform translate-y-6">
-              <p class="text-6xl font-black tracking-tighter mb-2">99.9%</p>
-              <p class="text-[9px] font-black uppercase tracking-[0.3em] opacity-50">Reliability Coefficient</p>
-            </div>
-          </div>
+        <div class="w-full lg:w-auto">
+           <button class="w-full lg:w-auto bg-amber-500 text-[#020617] px-8 py-5 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-2xl hover:bg-white transition-all transform hover:-translate-y-1">Get Compliance Data</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <div class="reveal-item tech-card p-8 rounded-3xl">
+          <i data-lucide="microscope" class="text-amber-500 w-6 h-6 mb-8"></i>
+          <h4 class="text-white font-black uppercase text-[10px] tracking-widest mb-3">Chemical Matrix</h4>
+          <p class="text-slate-500 text-[11px] leading-relaxed mb-6">Verification of Carbon-Manganese ratios for optimum weldability.</p>
+          <span class="mono text-[8px] text-emerald-500 uppercase">IS 2062 Compliant</span>
+        </div>
+        <div class="reveal-item tech-card p-8 rounded-3xl">
+          <i data-lucide="layers" class="text-blue-500 w-6 h-6 mb-8"></i>
+          <h4 class="text-white font-black uppercase text-[10px] tracking-widest mb-3">Mechanical Stress</h4>
+          <p class="text-slate-500 text-[11px] leading-relaxed mb-6">Yield point and UTS analysis for foundational stability.</p>
+          <span class="mono text-[8px] text-blue-500 uppercase">PSI Verified</span>
+        </div>
+        <div class="reveal-item tech-card p-8 rounded-3xl">
+          <i data-lucide="award" class="text-red-500 w-6 h-6 mb-8"></i>
+          <h4 class="text-white font-black uppercase text-[10px] tracking-widest mb-3">Audit Trail</h4>
+          <p class="text-slate-500 text-[11px] leading-relaxed mb-6">Unique batch coding tied to digital MTC reports for every line.</p>
+          <span class="mono text-[8px] text-red-500 uppercase">Full Traceability</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
-  <section id="projects" class="py-32 md:py-64 bg-[#f8fafc] blueprint-grid">
-    <div class="container mx-auto px-6">
-      <div class="reveal-item flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
-        <div class="max-w-2xl">
-          <h2 class="text-6xl md:text-9xl font-black text-[#020617] tracking-tighter mb-8 leading-none">Iconic <br />Builds.</h2>
-          <p class="text-slate-500 font-extrabold text-xl md:text-2xl border-l-4 border-amber-500 pl-8">Supplying the structural backbone for South India's most defining infrastructure.</p>
+  <!-- Iconic Builds -->
+  <section id="projects" class="py-16 md:py-32 bg-[#f8fafc] blueprint-grid">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="reveal-item flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div class="max-w-xl">
+          <h2 class="text-5xl md:text-8xl font-black text-[#020617] tracking-tighter mb-4 leading-none text-center md:text-left">Projects.</h2>
+          <p class="text-slate-500 font-bold text-base md:text-xl border-l-4 border-amber-500 pl-6 mx-auto md:mx-0">Supplying the structural backbone for South India's infrastructure.</p>
         </div>
-        <button class="bg-[#020617] text-white px-12 py-6 rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center shadow-xl hover:bg-amber-500 transition-all group">
-          Full Portfolio <i data-lucide="arrow-right" class="ml-6 group-hover:translate-x-3 transition-transform"></i>
-        </button>
+        <button class="w-full md:w-auto bg-[#020617] text-white px-8 py-4 rounded-xl font-black text-[9px] uppercase tracking-widest hover:bg-amber-500 transition-all">Full Portfolio</button>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12" id="projects-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10" id="projects-grid">
         <!-- Projects injected here -->
       </div>
     </div>
   </section>
 
-  <!-- Leadership Section: THE WHITE SECTION -->
-  <section id="vision" class="py-32 md:py-64 bg-white relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10 blueprint-grid pointer-events-none"></div>
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid lg:grid-cols-12 gap-24 items-center">
+  <!-- Leadership Section -->
+  <section id="vision" class="py-16 md:py-32 bg-white relative overflow-hidden">
+    <div class="container mx-auto px-4 md:px-6 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-8 md:gap-16 items-center">
         <div class="lg:col-span-5 reveal-item">
-          <div class="relative">
-            <div class="absolute -inset-10 bg-amber-500/5 rounded-full blur-[100px]"></div>
-            <div class="relative overflow-hidden rounded-[3.5rem] shadow-premium aspect-[4/5] bg-slate-100">
-              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1200" class="w-full h-full object-cover grayscale transition-all duration-1000">
-              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white p-12 pt-24">
-                <p class="text-[#020617] font-black text-3xl tracking-tighter">Prabu Parameshwaran</p>
-                <p class="text-amber-600 text-[10px] font-black uppercase tracking-[0.4em] mt-2">Managing Director & Visionary</p>
-              </div>
+          <div class="relative overflow-hidden rounded-[2.5rem] shadow-premium aspect-[4/5] bg-slate-100 max-w-sm mx-auto lg:max-w-none">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1200" class="w-full h-full object-cover grayscale">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white p-8">
+              <p class="text-[#020617] font-black text-2xl tracking-tighter">Prabu Parameshwaran</p>
+              <p class="text-amber-600 text-[8px] font-black uppercase tracking-[0.3em] mt-1">Managing Director</p>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-7 reveal-item">
-           <i data-lucide="quote" size="80" class="text-slate-100 mb-10"></i>
-           <h2 class="text-5xl md:text-[85px] font-black leading-[0.9] tracking-tighter mb-12 italic text-[#020617]">
+        <div class="lg:col-span-7 reveal-item text-center lg:text-left">
+           <i data-lucide="quote" size="48" class="text-slate-100 mb-6 mx-auto lg:mx-0"></i>
+           <h2 class="text-4xl md:text-[65px] font-black leading-[1] tracking-tighter mb-8 italic text-[#020617]">
               "Integrity is the <br><span class="text-amber-500">Unseen Load</span> <br>defining our legacy."
            </h2>
-           <p class="text-xl md:text-3xl text-slate-500 font-light leading-relaxed mb-16 max-w-2xl border-l-8 border-amber-500 pl-10">
-              Leadership anchored by the philosophy that structural safety is a non-negotiable human right. Since 1994, our focus has been <span class="font-bold text-[#020617]">unshakable resilience</span>.
+           <p class="text-lg md:text-xl text-slate-500 font-medium leading-relaxed mb-10 max-w-2xl border-l-4 border-amber-500 pl-6 mx-auto lg:mx-0">
+              Leading with the conviction that structural safety is a non-negotiable right. Since 1994, our focus has been unyielding quality.
            </p>
            
-           <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-16">
-              <div class="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-xl transition-all">
-                 <i data-lucide="scale" class="text-amber-500 mb-4" size="28"></i>
-                 <h4 class="text-[10px] font-black uppercase tracking-widest text-[#020617] mb-2">Unbiased Audits</h4>
-                 <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest">NABL Validation.</p>
+           <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+              <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                 <i data-lucide="scale" class="text-amber-500 mb-3 mx-auto lg:mx-0" size="20"></i>
+                 <h4 class="text-[8px] font-black uppercase tracking-widest text-[#020617]">Audits</h4>
               </div>
-              <div class="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-xl transition-all">
-                 <i data-lucide="target" class="text-blue-500 mb-4" size="28"></i>
-                 <h4 class="text-[10px] font-black uppercase tracking-widest text-[#020617] mb-2">Precision Load</h4>
-                 <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest">Calculated Flux.</p>
+              <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                 <i data-lucide="target" class="text-blue-500 mb-3 mx-auto lg:mx-0" size="20"></i>
+                 <h4 class="text-[8px] font-black uppercase tracking-widest text-[#020617]">Supply</h4>
               </div>
-              <div class="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-xl transition-all">
-                 <i data-lucide="award" class="text-red-500 mb-4" size="28"></i>
-                 <h4 class="text-[10px] font-black uppercase tracking-widest text-[#020617] mb-2">Legacy Hub</h4>
-                 <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest">30 Year Node.</p>
+              <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hidden md:block">
+                 <i data-lucide="award" class="text-red-500 mb-3 mx-auto lg:mx-0" size="20"></i>
+                 <h4 class="text-[8px] font-black uppercase tracking-widest text-[#020617]">Heritage</h4>
               </div>
            </div>
            
-           <button class="bg-[#020617] text-white px-12 py-6 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl hover:bg-amber-500 transition-all">Leadership Principles</button>
+           <button class="bg-[#020617] text-white px-8 py-4 rounded-xl font-black text-[9px] uppercase tracking-widest hover:bg-amber-500 transition-all">Executive Profile</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ Section -->
-  <section class="py-32 bg-[#f8fafc] blueprint-grid border-y border-slate-100">
-    <div class="container mx-auto px-6 max-w-4xl">
-      <div class="text-center mb-24 reveal-item">
-        <span class="text-amber-500 font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Knowledge Base</span>
-        <h2 class="text-4xl md:text-7xl font-black text-[#020617] mb-6 tracking-tighter">Operational Q&A</h2>
-        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Technical and logistical details for professional site procurement.</p>
+  <!-- Q&A Section -->
+  <section class="py-16 bg-[#f8fafc] blueprint-grid">
+    <div class="container mx-auto px-4 md:px-6 max-w-4xl">
+      <div class="text-center mb-12 reveal-item">
+        <span class="text-amber-500 font-black text-[8px] uppercase tracking-[0.4em] mb-3 block">Knowledge Hub</span>
+        <h2 class="text-3xl md:text-5xl font-black text-[#020617] tracking-tighter">Operational Q&A</h2>
       </div>
-      <div class="space-y-6" id="faq-container">
+      <div class="space-y-3" id="faq-container">
         <!-- FAQs injected here -->
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer id="reach" class="bg-[#020617] text-white pt-32 pb-16 relative overflow-hidden">
-    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-amber-500 via-blue-500 to-red-500"></div>
-    <div class="container mx-auto px-6">
+  <footer id="reach" class="bg-[#020617] text-white pt-20 pb-10 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-[2px] bg-amber-500"></div>
+    <div class="container mx-auto px-4 md:px-6">
       
-      <!-- Top Section -->
-      <div class="reveal-item flex flex-col lg:flex-row justify-between items-start lg:items-center mb-28 pb-24 border-b border-white/5 gap-16">
-        <div class="max-w-2xl">
-          <h2 class="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-none">Secure Your <br /><span class="text-amber-500 underline decoration-4 underline-offset-8 decoration-amber-500/30">Contract.</span></h2>
-          <p class="text-slate-400 font-black text-sm uppercase tracking-[0.4em]">Initialize Your Strategic Supply Protocol</p>
+      <div class="reveal-item flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16 pb-12 border-b border-white/5 gap-10">
+        <div>
+          <h2 class="text-4xl md:text-6xl font-black mb-4 tracking-tighter leading-none">Ready to <br /><span class="text-amber-500 underline decoration-2 underline-offset-4">Build?</span></h2>
+          <p class="text-slate-400 font-black text-[9px] uppercase tracking-[0.3em]">Initialize Your Strategic Supply Protocol</p>
         </div>
-        <div class="flex flex-col sm:flex-row gap-8 w-full lg:w-auto">
-          <button class="bg-amber-500 text-[#020617] px-14 py-7 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl hover:bg-white transition-all transform hover:-translate-y-2">Access Batch Pricing</button>
-          <button class="bg-white/5 text-white border border-white/20 px-14 py-7 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all transform hover:-translate-y-2">Contact Technical HQ</button>
+        <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+          <button class="bg-amber-500 text-[#020617] px-8 py-4 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-white transition-all">Batch Pricing</button>
+          <button class="bg-white/5 text-white border border-white/20 px-8 py-4 rounded-xl font-black text-[10px] uppercase tracking-widest">Technical HQ</button>
         </div>
       </div>
 
-      <!-- Main Footer Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-32">
-        <div class="reveal-item">
-          <div class="flex items-center space-x-5 mb-10 group cursor-pointer">
-            <div class="w-14 h-14 bg-white text-slate-950 flex items-center justify-center font-black text-2xl rounded-2xl">M</div>
-            <div class="flex flex-col">
-              <span class="text-2xl font-black tracking-tighter text-white">MVP TRADING</span>
-              <span class="text-[9px] font-black uppercase tracking-[0.3em] text-amber-500">Structural Hub</span>
-            </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div>
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-10 h-10 bg-white text-slate-950 flex items-center justify-center font-black text-xl rounded-lg">M</div>
+            <span class="text-lg font-black tracking-tighter text-white uppercase">MVP TRADING</span>
           </div>
-          <p class="text-slate-400 text-sm leading-relaxed mb-10 font-medium opacity-60">South India's Tier-1 industrial node. Delivering certified structural excellence since 1994.</p>
-          <div class="flex space-x-6">
-            <a href="#" class="w-12 h-12 bg-white/5 text-white flex items-center justify-center rounded-2xl hover:bg-amber-500 transition-all"><i data-lucide="linkedin" size="20"></i></a>
-            <a href="#" class="w-12 h-12 bg-white/5 text-white flex items-center justify-center rounded-2xl hover:bg-amber-500 transition-all"><i data-lucide="instagram" size="20"></i></a>
-            <a href="#" class="w-12 h-12 bg-white/5 text-white flex items-center justify-center rounded-2xl hover:bg-amber-500 transition-all"><i data-lucide="twitter" size="20"></i></a>
+          <p class="text-slate-400 text-xs leading-relaxed mb-6 font-medium opacity-60">Supplying South India's industrial backbone since 1994.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-8 h-8 bg-white/5 text-white flex items-center justify-center rounded-lg hover:bg-amber-500 transition-all"><i data-lucide="linkedin" size="16"></i></a>
+            <a href="#" class="w-8 h-8 bg-white/5 text-white flex items-center justify-center rounded-lg hover:bg-amber-500 transition-all"><i data-lucide="instagram" size="16"></i></a>
           </div>
         </div>
 
-        <div class="reveal-item">
-          <h5 class="text-[10px] font-black uppercase tracking-[0.5em] text-amber-500 mb-12">Supply Node</h5>
-          <ul class="space-y-6">
-            <li><a href="#" class="text-slate-300 text-xs font-black hover:text-white transition-colors uppercase tracking-widest">Structural Steel</a></li>
-            <li><a href="#" class="text-slate-300 text-xs font-black hover:text-white transition-colors uppercase tracking-widest">Industrial Cement</a></li>
-            <li><a href="#" class="text-slate-300 text-xs font-black hover:text-white transition-colors uppercase tracking-widest">Monsoon Roofing</a></li>
+        <div>
+          <h5 class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-500 mb-6">Inventory</h5>
+          <ul class="space-y-3 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <li><a href="#" class="hover:text-white transition-colors">Structural Steel</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Premium Cement</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Roofing Systems</a></li>
           </ul>
         </div>
 
-        <div class="reveal-item">
-          <h5 class="text-[10px] font-black uppercase tracking-[0.5em] text-amber-500 mb-12">HQ Kerala</h5>
-          <div class="space-y-8">
-            <div class="flex items-start space-x-6 text-slate-300 text-xs uppercase font-black leading-loose">
-              <i data-lucide="map-pin" class="text-amber-500 shrink-0 mt-1"></i>
-              <span class="tracking-widest">Mangalamkunnu, Kattukulam, <br>Palakkad, Kerala - 679514</span>
-            </div>
-            <div class="p-10 bg-amber-500 rounded-[2.5rem] shadow-2xl cursor-pointer hover:bg-white transition-all transform hover:-rotate-2 group" onclick="window.location.href='tel:+919447221444'">
-              <p class="text-[#020617] text-[10px] font-black uppercase tracking-widest mb-3 opacity-60">Batch Hotline (24/7)</p>
-              <p class="text-[#020617] text-2xl font-black tracking-tighter group-hover:scale-105 transition-transform">+91 9447 221 444</p>
-            </div>
+        <div>
+          <h5 class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-500 mb-6">Office</h5>
+          <div class="space-y-4">
+            <p class="text-slate-400 text-[9px] uppercase font-black leading-relaxed flex items-start">
+              <i data-lucide="map-pin" class="text-amber-500 shrink-0 mr-2" size="14"></i>
+              <span>Mangalamkunnu, Palakkad, <br>Kerala - 679514</span>
+            </p>
+            <button class="bg-amber-500 text-[#020617] px-6 py-3 rounded-lg font-black text-[9px] uppercase tracking-widest" onclick="window.location.href='tel:+919447221444'">+91 9447 221 444</button>
           </div>
         </div>
 
-        <div class="reveal-item">
-          <h5 class="text-[10px] font-black uppercase tracking-[0.5em] text-amber-500 mb-12">Resources</h5>
-          <ul class="space-y-6">
-            <li><a href="#" class="text-slate-300 text-xs font-black hover:text-white transition-colors uppercase tracking-widest">Supply Catalog</a></li>
-            <li><a href="#" class="text-slate-300 text-xs font-black hover:text-white transition-colors uppercase tracking-widest">Compliance Standards</a></li>
-            <li><a href="#" class="text-slate-300 text-xs font-black hover:text-white transition-colors uppercase tracking-widest">Partner Portal</a></li>
+        <div>
+          <h5 class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-500 mb-6">Company</h5>
+          <ul class="space-y-3 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <li><a href="#" class="hover:text-white transition-colors">IS Standards</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Partner Portal</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Safety Code</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="pt-12 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-8">
-        <span class="text-[9px] font-black text-slate-500 uppercase tracking-[0.5em]">&copy; 2024 MVP TRADING SOLUTIONS PVT LTD. REINFORCING EXCELLENCE.</span>
-        <div class="flex space-x-12">
-            <a href="#" class="text-[8px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">Safety Protocol</a>
-            <a href="#" class="text-[8px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">Privacy Node</a>
+      <div class="pt-8 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-4">
+        <span class="text-[7px] font-black text-slate-600 uppercase tracking-[0.3em]">&copy; 2024 MVP TRADING SOLUTIONS. REINFORCING KERALA.</span>
+        <div class="flex space-x-8">
+            <a href="#" class="text-[7px] font-black uppercase tracking-widest text-slate-600 hover:text-white transition-colors">Privacy</a>
+            <a href="#" class="text-[7px] font-black uppercase tracking-widest text-slate-600 hover:text-white transition-colors">Terms</a>
         </div>
       </div>
     </div>
@@ -503,84 +445,52 @@
 
   <!-- Product Modal -->
   <div id="product-modal" class="fixed inset-0 z-[250] flex items-center justify-center p-4 hidden">
-    <div class="absolute inset-0 bg-[#020617]/95 backdrop-blur-md" id="modal-overlay"></div>
-    <div class="relative w-full max-w-6xl bg-white rounded-[3.5rem] overflow-hidden shadow-premium flex flex-col lg:flex-row max-h-[90vh] z-10 scale-95 opacity-0 transition-all duration-500" id="modal-content">
-      <button id="close-modal" class="absolute top-10 right-10 z-10 p-4 bg-slate-100 hover:bg-amber-500 hover:text-white text-[#020617] rounded-2xl transition-all">
-        <i data-lucide="x" size="24"></i>
+    <div class="absolute inset-0 bg-[#020617]/90 backdrop-blur-lg" id="modal-overlay"></div>
+    <div class="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-premium flex flex-col md:flex-row max-h-[90vh] z-10 scale-95 opacity-0 transition-all duration-300" id="modal-content">
+      <button id="close-modal" class="absolute top-4 right-4 z-10 p-2 bg-slate-100 text-[#020617] rounded-lg">
+        <i data-lucide="x" size="18"></i>
       </button>
-      <div class="w-full lg:w-1/2 h-80 lg:h-auto relative">
+      <div class="w-full md:w-1/2 h-48 md:h-auto relative">
         <img id="modal-img" src="" class="absolute inset-0 w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#020617]/60 to-transparent"></div>
       </div>
-      <div class="w-full lg:w-1/2 p-10 lg:p-20 overflow-y-auto no-scrollbar bg-white">
-        <span id="modal-category" class="text-[9px] font-black uppercase tracking-[0.4em] mb-6 inline-block px-6 py-2 rounded-full border border-slate-100"></span>
-        <h2 id="modal-title" class="text-4xl lg:text-7xl font-black text-[#020617] mb-8 tracking-tighter leading-tight"></h2>
-        <p id="modal-desc" class="text-slate-600 mb-12 leading-relaxed font-medium text-lg lg:text-xl"></p>
-        <div class="space-y-6 mb-14" id="modal-specs"></div>
-        <button class="w-full bg-[#020617] text-white py-7 rounded-2xl font-black hover:bg-amber-500 transition-all tracking-[0.2em] uppercase text-xs shadow-2xl">Initialize Batch Quote Request</button>
+      <div class="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto no-scrollbar bg-white">
+        <span id="modal-category" class="text-[7px] font-black uppercase tracking-[0.3em] mb-4 inline-block px-3 py-1 rounded-full border border-slate-100"></span>
+        <h2 id="modal-title" class="text-3xl md:text-5xl font-black text-[#020617] mb-4 tracking-tighter leading-tight"></h2>
+        <p id="modal-desc" class="text-slate-500 mb-8 leading-relaxed font-medium text-sm"></p>
+        <div class="space-y-3 mb-8" id="modal-specs"></div>
+        <button class="w-full bg-[#020617] text-white py-4 rounded-xl font-black hover:bg-amber-500 transition-all uppercase text-[9px] tracking-widest">Request Site Quote</button>
       </div>
     </div>
   </div>
 
   <!-- WhatsApp Float -->
-  <button id="whatsapp-float" class="fixed bottom-10 right-10 z-[200] w-20 h-20 bg-[#25D366] text-white rounded-3xl flex items-center justify-center shadow-premium hover:scale-110 active:scale-95 transition-all border-4 border-white">
-    <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </button>
-
-  <!-- AI Chat Window -->
-  <div id="ai-chat-window" class="fixed bottom-36 right-10 z-[200] w-[380px] bg-white rounded-[2.5rem] shadow-premium flex flex-col hidden border border-slate-100 overflow-hidden">
-    <div class="bg-[#020617] p-8 flex justify-between items-center">
-      <div class="flex items-center space-x-4">
-        <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-[#020617]">
-          <i data-lucide="zap" size="20"></i>
-        </div>
-        <div class="flex flex-col">
-           <span class="text-white font-black uppercase text-[10px] tracking-widest">MVP AI Consultant</span>
-           <span class="text-amber-500 text-[7px] font-black uppercase tracking-widest">Active Batch Protocol</span>
-        </div>
-      </div>
-      <button id="close-chat" class="text-white/30 hover:text-white transition-colors"><i data-lucide="x"></i></button>
-    </div>
-    <div id="chat-messages" class="flex-1 p-8 space-y-6 overflow-y-auto max-h-[350px] text-sm no-scrollbar bg-slate-50">
-      <div class="bg-white p-5 rounded-3xl rounded-tl-none text-slate-600 font-semibold shadow-sm border border-slate-100">
-        I am the MVP Technical Consultant. How can I assist you with your structural procurement today?
-      </div>
-    </div>
-    <div class="p-6 bg-white border-t border-slate-50 flex space-x-3">
-      <input type="text" id="chat-input" placeholder="Ask about IS 2062 steel..." class="flex-1 bg-slate-100 rounded-2xl px-6 py-4 outline-none font-bold text-[10px] uppercase tracking-widest">
-      <button id="send-chat" class="bg-[#020617] text-white p-4 rounded-2xl hover:bg-amber-500 transition-all shadow-xl"><i data-lucide="send" size="20"></i></button>
-    </div>
-  </div>
-
-  <button id="ai-toggle" class="fixed bottom-36 right-10 z-[200] w-20 h-20 bg-[#020617] text-white rounded-3xl flex items-center justify-center shadow-premium hover:scale-110 active:scale-95 transition-all border-4 border-white">
-    <i data-lucide="bot" size="32"></i>
-  </button>
+  <a href="https://wa.me/917593038781" target="_blank" id="whatsapp-float" class="fixed bottom-6 right-6 z-[200] w-14 h-14 bg-[#25D366] text-white rounded-2xl flex items-center justify-center shadow-xl hover:scale-110 transition-all border-4 border-white">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 
   <!-- JS Logic -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script type="module">
-    import { GoogleGenAI } from "@google/genai";
-
     const products = [
       { 
         id: "structural-metals", title: "Structural Metals", category: "High-Tensile Steel",
         icon: "building-2", imageUrl: "https://eps.leeds.ac.uk/images/resized/800x400-0-0-1-85-Steelsupport_800x400_min__1_.jpg",
-        description: "Comprehensive range of structural steel including I-Beams, H-Beams, Channels, and Angles designed for extreme industrial load-bearing.",
-        specs: ["IS 2062:2011 Grade Certified", "Tensile Strength: 410-540 MPa", "NABL Lab Tested Batch Control", "Custom Precision Cutting"],
+        description: "Full industrial range including I-Beams, H-Beams, Channels, and Angles for extreme structural loads.",
+        specs: ["IS 2062:2011 Grade Certified", "Tensile Strength: 410-540 MPa", "NABL Lab Tested Batch Control"],
         accent: "blue"
       },
       { 
         id: "elite-cements", title: "Premium Binders", category: "Industrial Cement",
         icon: "package", imageUrl: "https://prod-iifl-assets.storage.googleapis.com/2024/10/Cement-Sector-1-768x432.jpg.webp",
-        description: "Tier-1 industrial cement supply providing OPC and PPC variants optimized for monolithic foundations and finishing works.",
-        specs: ["OPC 53 Grade (IS 12269)", "High Early Strength PPC", "Moisture-Safe Multi-Ply Packaging", "Thermal Crack Mitigation"],
+        description: "Tier-1 cement supply: OPC and PPC variants optimized for monolithic industrial foundations.",
+        specs: ["OPC 53 Grade (IS 12269)", "High Early Strength PPC", "Thermal Crack Mitigation"],
         accent: "amber"
       },
       { 
         id: "roofing", title: "Monsoon Shield", category: "Protective Layers",
         icon: "shield-check", imageUrl: "https://mccoymart.com/post/wp-content/uploads/Choosing-The-Right-Roofing-Contractor-Essential-Questions-To-Ask.jpg",
-        description: "High-durability metal and composite roofing systems engineered specifically for the extreme Kerala rainfall cycles.",
-        specs: ["AZ150 Galvalume® Shield", "Solar Reflectance Index 80+", "Leak-Lock Technology", "Corrosion Resistant (C5) Grade"],
+        description: "High-durability metal and composite roofing systems engineered for extreme tropical rainfall.",
+        specs: ["AZ150 Galvalume® Shield", "Solar Reflectance Index 80+", "Leak-Lock Technology"],
         accent: "red"
       }
     ];
@@ -596,60 +506,44 @@
     ];
 
     const projectGalleries = [
-      { title: "Kochi High-Rise", desc: "Supplying 450T of IS 2062 Grade Steel.", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200", status: "Supplied" },
-      { title: "Coastal Hub", desc: "Foundation binders for high-salinity zone.", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200", status: "Active Node" },
-      { title: "Industrial Park", desc: "Monsoon-shield roofing for manufacturing cluster.", img: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=1200", status: "Completed" }
+      { title: "Kochi High-Rise", desc: "450T IS 2062 Grade Steel.", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200", status: "Supplied" },
+      { title: "Coastal Hub", desc: "Foundational binders for saline zones.", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200", status: "Active Node" },
+      { title: "Industrial Park", desc: "Monsoon-shield roofing cluster.", img: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=1200", status: "Completed" }
     ];
 
     const faqs = [
-      { q: "What is the Minimum Order Quantity (MOQ)?", a: "For wholesale pricing, we typically require a minimum of 5 metric tons for mixed structural sections. Smaller quantities are available but may be subject to retail logistics pricing." },
-      { q: "Do you provide MTC Certificates for every batch?", a: "Yes. Every delivery is accompanied by the original MTC from the plant (e.g., JSW, TATA) as well as our internal batch-specific structural integrity report." },
-      { q: "Can you deliver to remote hilly areas?", a: "Absolutely. Our specialized fleet is designed for Kerala's diverse topography, ensuring site-direct delivery even in challenging terrain." },
-      { q: "How do you handle site-specific material testing?", a: "We can facilitate third-party laboratory testing at NABL accredited labs if your project specifications require additional local verification." }
+      { q: "What is the Minimum Order Quantity (MOQ)?", a: "Typically 5 metric tons for mixed wholesale pricing. Site-specific retail quantities available." },
+      { q: "Do you provide MTC Certificates?", a: "Yes. Original manufacturer test certificates (JSW, TATA, etc.) provided with every site delivery." },
+      { q: "Can you deliver to remote hilly areas?", a: "Our fleet is specialized for Kerala's terrain, reaching sites across Wayanad and beyond." },
+      { q: "How do you handle site testing?", a: "Facilitating NABL-accredited laboratory verification upon client request." }
     ];
 
-    // Initialize Lucide Icons
     lucide.createIcons();
 
-    // Setup Partner Vault Showcase
-    const showcase = document.getElementById('partners-showcase');
-    partners.slice(0, 4).forEach(p => {
-      const div = document.createElement('div');
-      div.className = "reveal-item partner-vault rounded-[2.5rem] h-64 flex flex-col items-center justify-center p-8 group";
-      div.innerHTML = `
-        <div class="absolute top-6 left-6 flex items-center space-x-2">
-           <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-           <span class="text-[7px] font-black uppercase tracking-widest text-white/40">Verified Node</span>
-        </div>
-        <img src="${p.logo}" alt="${p.name}" class="h-16 md:h-20 object-contain grayscale transition-all duration-700 group-hover:grayscale-0">
-        <span class="mt-6 text-[10px] font-black uppercase tracking-[0.4em] text-white/30 group-hover:text-amber-500 transition-colors">${p.name}</span>
-      `;
-      showcase.appendChild(div);
-    });
-
-    // Setup Alliances Ticker
-    const ticker = document.getElementById('alliances-ticker');
+    const ticker = document.getElementById('partners-ticker');
     [...partners, ...partners].forEach(p => {
       const div = document.createElement('div');
-      div.className = "flex-shrink-0 flex items-center space-x-6 grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all cursor-default";
-      div.innerHTML = `<img src="${p.logo}" alt="${p.name}" class="h-10 md:h-12 object-contain"> <span class="font-black text-[10px] uppercase tracking-widest text-white/50">${p.name}</span>`;
+      div.className = "flex-shrink-0 flex flex-col items-center justify-center grayscale hover:grayscale-0 transition-all opacity-40 hover:opacity-100 duration-500 cursor-default";
+      div.innerHTML = `
+        <img src="${p.logo}" alt="${p.name}" class="h-10 md:h-14 object-contain mb-2">
+        <span class="text-[8px] font-black uppercase tracking-widest text-slate-400">${p.name}</span>
+      `;
       ticker.appendChild(div);
     });
 
-    // Setup Products Grid
     const productsGrid = document.getElementById('products-grid');
     products.forEach(p => {
       const card = document.createElement('div');
-      card.className = "reveal-item group cursor-pointer hover:-translate-y-4 transition-all duration-500";
+      card.className = "reveal-item group cursor-pointer hover:translate-y-[-5px] transition-all duration-300";
       card.innerHTML = `
-        <div class="relative h-[600px] overflow-hidden rounded-[3rem] mb-10 shadow-premium bg-[#020617]">
-          <img src="${p.imageUrl}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-40 group-hover:opacity-100" loading="lazy">
+        <div class="relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl mb-4 md:mb-8 shadow-premium bg-[#020617]">
+          <img src="${p.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-40 group-hover:opacity-100 grayscale group-hover:grayscale-0" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/10 to-transparent"></div>
-          <div class="absolute bottom-12 left-12 right-12">
-            <span class="text-[8px] font-black uppercase tracking-[0.4em] text-amber-500 mb-6 block">${p.category}</span>
-            <h3 class="text-4xl font-black text-white mb-6 tracking-tighter">${p.title}</h3>
-            <div class="flex items-center text-[10px] font-black uppercase tracking-widest text-white/50 group-hover:text-amber-500 transition-colors">
-              TECH SPEC <i data-lucide="arrow-right" size="14" class="ml-3 transition-transform group-hover:translate-x-2"></i>
+          <div class="absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6 md:right-10">
+            <span class="text-[7px] font-black uppercase tracking-[0.3em] text-amber-500 mb-3 block">${p.category}</span>
+            <h3 class="text-2xl md:text-3xl font-black text-white mb-4 tracking-tighter">${p.title}</h3>
+            <div class="flex items-center text-[9px] font-black uppercase tracking-widest text-white/50 group-hover:text-white transition-colors">
+              VIEW SPEC <i data-lucide="arrow-right" size="12" class="ml-2 transition-transform group-hover:translate-x-1"></i>
             </div>
           </div>
         </div>
@@ -658,34 +552,32 @@
       productsGrid.appendChild(card);
     });
 
-    // Setup Projects Grid
     const projectsGrid = document.getElementById('projects-grid');
     projectGalleries.forEach(proj => {
       const card = document.createElement('div');
-      card.className = "reveal-item group relative h-[500px] overflow-hidden rounded-[2.5rem] shadow-premium hover:-translate-y-2 transition-all duration-700";
+      card.className = "reveal-item group relative h-[350px] md:h-[450px] overflow-hidden rounded-3xl shadow-premium hover:translate-y-[-5px] transition-all duration-500";
       card.innerHTML = `
         <img src="${proj.img}" class="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/50 to-transparent opacity-80"></div>
-        <div class="absolute bottom-12 left-12 right-12">
-          <div class="bg-amber-500 text-[#020617] px-4 py-1.5 rounded-full text-[8px] font-black uppercase tracking-widest mb-4 inline-block">${proj.status}</div>
-          <h4 class="text-white text-3xl font-black mb-2 tracking-tighter">${proj.title}</h4>
-          <p class="text-white/40 text-[10px] font-bold uppercase tracking-widest">${proj.desc}</p>
+        <div class="absolute inset-0 bg-[#020617]/70 group-hover:bg-[#020617]/40 transition-all opacity-80"></div>
+        <div class="absolute bottom-8 left-8 right-8 text-center md:text-left">
+          <div class="bg-amber-500 text-[#020617] px-3 py-1 rounded-full text-[7px] font-black uppercase tracking-widest mb-3 inline-block">${proj.status}</div>
+          <h4 class="text-white text-xl md:text-2xl font-black mb-1 tracking-tighter">${proj.title}</h4>
+          <p class="text-white/40 text-[8px] font-bold uppercase tracking-widest">${proj.desc}</p>
         </div>
       `;
       projectsGrid.appendChild(card);
     });
 
-    // Setup FAQs
     const faqContainer = document.getElementById('faq-container');
     faqs.forEach((faq) => {
       const div = document.createElement('div');
-      div.className = "reveal-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm transition-all bg-white hover:border-amber-500/30";
+      div.className = "reveal-item border border-slate-100 rounded-xl overflow-hidden bg-white hover:border-amber-500 transition-all";
       div.innerHTML = `
-        <button class="w-full flex justify-between items-center p-8 text-left hover:bg-slate-50 transition-colors">
-          <span class="font-black text-[#020617] pr-10 text-lg tracking-tighter">${faq.q}</span>
-          <i data-lucide="chevron-down" class="text-amber-500 transition-transform"></i>
+        <button class="w-full flex justify-between items-center p-5 text-left hover:bg-slate-50 transition-colors">
+          <span class="font-black text-[#020617] pr-4 text-xs tracking-tighter uppercase">${faq.q}</span>
+          <i data-lucide="chevron-down" class="text-amber-500 transition-transform w-4 h-4"></i>
         </button>
-        <div class="px-8 pb-8 pt-2 text-slate-500 text-base leading-relaxed font-medium hidden">
+        <div class="px-5 pb-5 pt-0 text-slate-500 text-[11px] leading-relaxed font-medium hidden">
           ${faq.a}
         </div>
       `;
@@ -694,7 +586,7 @@
       const icon = div.querySelector('i');
       btn.addEventListener('click', () => {
         const isHidden = content.classList.contains('hidden');
-        content.classList.toggle('hidden');
+        content.classList.toggle('hidden', !isHidden);
         icon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
       });
       faqContainer.appendChild(div);
@@ -702,23 +594,19 @@
 
     lucide.createIcons();
 
-    // Scroll Reveal Logic
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
     document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
 
-    // Nav Background on Scroll
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('navbar');
-      const isScrolled = window.scrollY > 50;
+      const isScrolled = window.scrollY > 30;
       nav.classList.toggle('glass-nav', isScrolled);
-      nav.classList.toggle('py-4', isScrolled);
     });
 
-    // Modal Handlers
     const modal = document.getElementById('product-modal');
     const modalContent = document.getElementById('modal-content');
     function openModal(p) {
@@ -728,8 +616,8 @@
       document.getElementById('modal-desc').innerText = p.description;
       const specsDiv = document.getElementById('modal-specs');
       specsDiv.innerHTML = p.specs.map(spec => `
-        <div class="flex items-center space-x-4 text-[10px] font-bold uppercase tracking-widest text-slate-700 p-6 bg-slate-50 rounded-2xl border border-slate-100">
-          <i data-lucide="check-circle" size="16" class="text-amber-500"></i> <span>${spec}</span>
+        <div class="flex items-center space-x-3 text-[8px] font-bold uppercase tracking-widest text-slate-700 p-4 bg-slate-50 rounded-lg border border-slate-100">
+          <i data-lucide="check-circle" size="12" class="text-amber-500"></i> <span>${spec}</span>
         </div>
       `).join('');
       lucide.createIcons();
@@ -737,7 +625,7 @@
       setTimeout(() => {
         modalContent.classList.remove('scale-95', 'opacity-0');
         modalContent.classList.add('scale-100', 'opacity-100');
-      }, 10);
+      }, 50);
       document.body.style.overflow = 'hidden';
     }
 
@@ -746,70 +634,18 @@
       setTimeout(() => {
         modal.classList.add('hidden');
         document.body.style.overflow = 'auto';
-      }, 500);
+      }, 300);
     }
     document.getElementById('close-modal').addEventListener('click', closeModal);
     document.getElementById('modal-overlay').addEventListener('click', closeModal);
 
-    // AI Consultant Logic
-    const aiToggle = document.getElementById('ai-toggle');
-    const aiChat = document.getElementById('ai-chat-window');
-    const chatInput = document.getElementById('chat-input');
-    const chatMessages = document.getElementById('chat-messages');
-
-    aiToggle.addEventListener('click', () => {
-      aiChat.classList.toggle('hidden');
-      if (!aiChat.classList.contains('hidden')) aiToggle.classList.add('hidden');
-    });
-
-    document.getElementById('close-chat').addEventListener('click', () => {
-      aiChat.classList.add('hidden');
-      aiToggle.classList.remove('hidden');
-    });
-
-    async function handleChat() {
-      const text = chatInput.value.trim();
-      if (!text) return;
-      
-      const userDiv = document.createElement('div');
-      userDiv.className = "bg-amber-500 p-6 rounded-[2.5rem] rounded-tr-none text-[#020617] font-black text-[10px] uppercase tracking-widest ml-12 shadow-md";
-      userDiv.innerText = text;
-      chatMessages.appendChild(userDiv);
-      chatInput.value = '';
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-
-      const botDiv = document.createElement('div');
-      botDiv.className = "bg-white p-6 rounded-[2.5rem] rounded-tl-none text-slate-400 font-bold border border-slate-100 animate-pulse";
-      botDiv.innerText = "Accessing Technical Grid...";
-      chatMessages.appendChild(botDiv);
-
-      try {
-        const aiInstance = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        const result = await aiInstance.models.generateContent({
-          model: 'gemini-3-flash-preview',
-          contents: text,
-          config: { systemInstruction: "You are the MVP AI Consultant. Answer in a professional industrial tone. Reference IS codes and structural best practices. Keep it concise." }
-        });
-        botDiv.classList.remove('animate-pulse', 'text-slate-400');
-        botDiv.classList.add('text-slate-600');
-        botDiv.innerText = result.text;
-      } catch {
-        botDiv.innerText = "Technical network offline. Use Batch Hotline: +91 9447 221 444.";
-      }
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-    document.getElementById('send-chat').addEventListener('click', handleChat);
-    chatInput.addEventListener('keypress', e => e.key === 'Enter' && handleChat());
-
-    // Mobile Logic
     document.getElementById('mobile-menu-btn').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('hidden'));
     document.getElementById('close-mobile-menu').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'));
 
-    // Responsive Image Optimization
     window.addEventListener('mousemove', (e) => {
-        const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-        const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-        document.getElementById('hero-img').style.transform = `scale(1.1) translate(${moveX}px, ${moveY}px)`;
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.002;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.002;
+        document.getElementById('hero-img').style.transform = `scale(1.03) translate(${moveX}px, ${moveY}px)`;
     });
   </script>
 </body>
